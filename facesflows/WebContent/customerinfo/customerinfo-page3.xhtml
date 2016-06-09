@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Customer Information</title>
+    </h:head>
+    <h:body>
+        <h2>Enter Customer Information (Page 3 of 4)</h2>
+        <h:form>
+            <h:panelGrid columns="3">
+                <p:outputLabel for="phoneMobile" value="Mobile Phone:"/>
+                <p:inputMask id="phoneMobile" value="${customer.phoneMobile}" mask="(999)9999999" required="true"/>
+                <p:message for="phoneMobile" display="icon"/>
+                <p:outputLabel for="email" value="Email:"/>
+                <p:inputText id="email" value="${customer.email}" required="true">
+                <f:validator validatorId="emailValidator" />
+                </p:inputText>
+                <p:message for="email" display="icon"/>
+                <h:commandButton value="Previous" action="customerinfo-page2"/>
+                <h:commandButton value="Next" action="customerinfo-page4"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

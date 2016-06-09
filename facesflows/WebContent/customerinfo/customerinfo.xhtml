@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+    <h:head>
+        <title>Customer Information</title>
+    </h:head>
+    <h:body>
+        <h2>Enter Customer Information (Page 1 of 4)</h2>
+        <h:form>
+            <h:panelGrid columns="3">
+                <p:outputLabel for="firstName" value="First Name:"/>
+                <p:inputText id="firstName" label="First Name" value="#{customer.firstName}" 
+                			  required="true" >
+                <f:validator validatorId="alphaValidator" />
+                </p:inputText>
+                <p:message for="firstName" display="icon"/>
+                <p:outputLabel for="middleName" value="Middle Name:"/>
+                <p:inputText id="middleName" label="Middle Name" value="#{customer.middleName}" 
+                			 required="true">
+                <f:validator validatorId="alphaValidator" />
+                </p:inputText>
+                <p:message for="middleName" display="icon"/>
+                <p:outputLabel for="lastName" value="Last Name:"/>
+                <p:inputText id="lastName" label="Last Name" value="#{customer.lastName}" 
+                			 required="true">
+                <f:validator validatorId="alphaValidator" />
+                </p:inputText>
+                <p:message for="lastName" display="icon"/>
+                <h:panelGroup/>
+                <h:commandButton value="Next" 
+                                 action="customerinfo-page2"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
