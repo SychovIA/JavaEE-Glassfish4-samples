@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <h:head>
+        <title>JPQL Demo</title>
+    </h:head>
+    <h:body>
+    <h:form style="font-size: 14px;">
+    	<h:panelGrid columns="3">
+    		<p:outputLabel for="findInput" value="Find US States:"/>
+    		<p:autoComplete id="findInput" value="#{selectQueryBean.usStates}" size="15" 
+    			completeMethod="#{selectQueryBean.completeState}" var="usState" itemLabel="#{usState.usStateNm}" itemValue="#{usState.usStateNm}"/>
+    		<p:commandButton actionListener="#{selectQueryBean.findStates}" update="table" icon="ui-icon-search" title="Search"/>
+    	</h:panelGrid>
+	</h:form>
+	<div style="width: 400px">
+        <h2 style="text-align: center;">US States</h2>
+        <p:dataTable var="usState" id="table" value="#{selectQueryBean.matchingStatesList}" emptyMessage="No states found." >
+            <p:column headerText="US States">
+                #{usState.usStateNm}
+            </p:column>
+            <p:column headerText="Code">
+                #{usState.usStateCd}
+            </p:column>
+        </p:dataTable>
+    </div>
+    </h:body>
+</html>
+
