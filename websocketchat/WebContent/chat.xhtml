@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsp/jstl/functions">
+      
+    <h:head>
+        <title>WebSocket Chat</title>
+        <meta name="viewport" content="width=device-width"/>
+        <script type="text/javascript">
+            var websocket;
+            function init() {
+            	console.log("wrewetyuio")
+                websocket = new WebSocket('ws://localhost:8080/websocketchat/websocketchat');
+                
+                websocket.onopen = function(event) {
+                    websocketOpen(event)
+                };
+                websocket.onmessage = function(event) {
+                    websocketMessage(event)
+                };
+                websocket.onerror = function(event) {
+                    websocketError(event)
+                };
+                
+            }
+
+            function websocketOpen(event) {
+                console.log("webSocketOpen invoked");
+            }
+
+            function websocketMessage(event) {
+                console.log("websocketMessage invoked");
+                document.getElementById('chatwindow').value += '\r' + event.data;
+            }
+
+            function websocketError(event) {
+                console.log("websocketError invoked");
+            }
+
+            function sendMessage() {
+      
+                var userName = document.getElementById('userName').value;
+                var msg = document.getElementById('chatinput').value;
+           
+               	websocket.send(userName + ": " + msg);
+            }
+            
+            function closeConnection(){
+                websocket.close();
+            }
+
+            window.addEventListener("load", init, false);
+        </script>
+    </h:head>
+    <body>
+        <form>
+       
+        	<INPUT type="hidden" id="userName" value="#{user.userName}"/>
+        	 <table border="0">
+                <tbody>
+                    <tr>
+                        <td><LABEL for="chatwindow">Chat Window</LABEL></td>
+                        <td><TEXTAREA id="chatwindow" rows="10"></TEXTAREA></td>
+                    </tr>
+                    <tr>
+                        <td><LABEL for="chatinput">Type Something Here</LABEL></td>
+                        <td><INPUT type="text" id="chatinput"/> <INPUT type="button" id="sendBtn" value="Send" onclick="sendMessage()"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><INPUT type="button" id="exitBtn" value="Exit" onclick="closeConnection()"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </body>
+</html>
